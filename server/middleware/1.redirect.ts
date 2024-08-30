@@ -7,7 +7,7 @@ export default eventHandler(async (event) => {
   const { slugRegex, reserveSlug } = useAppConfig(event)
   const { homeURL, linkCacheTtl, redirectWithQuery } = useRuntimeConfig(event)
   const { cloudflare } = event.context
-  return sendRedirect(event, parsePath(event.path.slice(1)))
+  return sendRedirect(event, event.path.slice(1))
   if (event.path === '/' && homeURL)
     return sendRedirect(event, homeURL)
 
