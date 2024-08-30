@@ -7,7 +7,7 @@ export default eventHandler(async (event) => {
   const { slugRegex, reserveSlug } = useAppConfig(event)
   const { homeURL, linkCacheTtl, redirectWithQuery } = useRuntimeConfig(event)
   const { cloudflare } = event.context
-
+  return sendRedirect(event, event.path)
   if (event.path === '/' && homeURL)
     return sendRedirect(event, homeURL)
 
@@ -22,7 +22,7 @@ export default eventHandler(async (event) => {
       catch (error) {
         console.error('Failed write access log:', error)
       }
-      const target = redirectWithQuery ? withQuery(link.url + event.path.slice(2), getQuery(event)) : link.url
+      const target = redirectWithQuery ? withQuery(link.url, getQuery(event)) : link.url
       return sendRedirect(event, target, +useRuntimeConfig(event).redirectStatusCode)
     }
   }
