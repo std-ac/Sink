@@ -3,11 +3,13 @@ import { parsePath, withQuery } from 'ufo'
 import type { LinkSchema } from '@/schemas/link'
 
 export default eventHandler(async (event) => {
-  const { pathname: slug } = parsePath(event.path.slice(1)) // remove leading slash
+  const { pathname: raw } = parsePath(event.path.slice(1)) // remove leading slash
   const { slugRegex, reserveSlug } = useAppConfig(event)
   const { homeURL, linkCacheTtl, redirectWithQuery } = useRuntimeConfig(event)
   const { cloudflare } = event.context
-  return sendRedirect(event, slug)
+  const slug = raw.split('/')[0]
+  const tail = raw.replace(slug, '')
+
   if (event.path === '/' && homeURL)
     return sendRedirect(event, homeURL)
 
@@ -22,7 +24,7 @@ export default eventHandler(async (event) => {
       catch (error) {
         console.error('Failed write access log:', error)
       }
-      const target = redirectWithQuery ? withQuery(link.url, getQuery(event)) : link.url
+      const target = redirectWithQuery ? withQuery(link.url + tail, getQuery(event)) : link.url + tail
       return sendRedirect(event, target, +useRuntimeConfig(event).redirectStatusCode)
     }
   }
