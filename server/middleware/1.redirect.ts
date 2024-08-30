@@ -1,9 +1,11 @@
 import type { z } from 'zod'
-import { parsePath, withQuery } from 'ufo'
+import { withQuery } from 'ufo'
 import type { LinkSchema } from '@/schemas/link'
 
 export default eventHandler(async (event) => {
-  const { pathname: slug } = parsePath(event.path.slice(1)) // remove leading slash
+  console.log('event.path:', event.path)
+  const { pathname: slug } = (event.path.slice(1)) // remove leading slash
+  console.log('slug:', slug)
   const { slugRegex, reserveSlug } = useAppConfig(event)
   const { homeURL, linkCacheTtl, redirectWithQuery } = useRuntimeConfig(event)
   const { cloudflare } = event.context
@@ -23,6 +25,7 @@ export default eventHandler(async (event) => {
         console.error('Failed write access log:', error)
       }
       const target = redirectWithQuery ? withQuery(link.url, getQuery(event)) : link.url
+      console.log('target:', target)
       return sendRedirect(event, target, +useRuntimeConfig(event).redirectStatusCode)
     }
   }

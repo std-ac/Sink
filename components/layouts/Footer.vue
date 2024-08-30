@@ -14,7 +14,7 @@ onMounted(() => {
         href="/"
         class="text-xl font-black leading-none text-gray-900 select-none dark:text-gray-100 logo"
         title="Sink"
-      >Sink</a>
+      >STD::AC</a>
       <a
         class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0"
         href="https://html.zone"

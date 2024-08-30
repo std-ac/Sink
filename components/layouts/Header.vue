@@ -15,7 +15,7 @@ const showMenu = ref(false)
         <div class="flex items-center justify-start w-1/4 h-full pr-4">
           <a
             href="/"
-            title="Sink"
+            title="STD::AC"
             class="flex items-center py-4 space-x-2 text-xl font-black text-gray-900 dark:text-gray-100 md:py-0"
           >
             <span
@@ -27,7 +27,7 @@ const showMenu = ref(false)
                 class="w-full h-full rounded-full"
               >
             </span>
-            <span class="mx-2">Sink</span>
+            <span class="mx-2">STD::AC</span>
           </a>
         </div>
 
@@ -53,7 +53,7 @@ const showMenu = ref(false)
                   class="w-full h-full rounded-full"
                 >
               </span>
-              <span class="mx-2">Sink</span>
+              <span class="mx-2">STD::AC</span>
             </a>
             <div class="w-full mx-4" />
             <div
