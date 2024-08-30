@@ -22,7 +22,7 @@ export default eventHandler(async (event) => {
       catch (error) {
         console.error('Failed write access log:', error)
       }
-      const target = redirectWithQuery ? withQuery(link.url, getQuery(event)) + event.path.slice(2) : link.url
+      const target = redirectWithQuery ? withQuery(link.url + event.path.slice(2), getQuery(event)) : link.url
       return sendRedirect(event, target, +useRuntimeConfig(event).redirectStatusCode)
     }
   }
